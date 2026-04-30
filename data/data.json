@@ -1,0 +1,87 @@
+{
+    "hello": "Xin chào. Shop có thể giúp gì cho bạn?",
+    "hi": "Hello bạn, cần hỗ trợ gì không?",
+    "xin chào": "Chào bạn, chúc bạn một ngày tốt lành",
+
+    "giá": "Giá sản phẩm từ 50k - 200k tùy loại",
+    "bảng giá": "Áo: 100k\nQuần: 150k\nGiày: 200k",
+
+    "mua hàng": "Bạn muốn mua gì? Nhắn tên sản phẩm nhé",
+    "đặt hàng": "Inbox để đặt hàng hoặc chọn sản phẩm",
+
+    "ship": "Ship toàn quốc, phí từ 20k tùy khu vực",
+    "phí ship": "Phí ship từ 20k - 40k",
+
+    "giờ mở cửa": "Shop mở từ 8h - 22h mỗi ngày",
+    "mở cửa": "8h - 22h",
+
+    "khuyến mãi": "Giảm 10% khi mua 2 sản phẩm trở lên",
+    "sale": "Đang có sale 10% toàn shop",
+
+    "liên hệ": "Zalo/Inbox để được hỗ trợ nhanh nhất",
+
+    "cảm ơn": "Dạ không có gì ạ. Bạn cần hỗ trợ thêm gì cứ nhắn shop nhé!",
+    "thanks": "Dạ không có gì ạ. Bạn cần hỗ trợ thêm gì cứ nhắn shop nhé!",
+    "ok": "Dạ ok ạ. Bạn gửi giúp shop thông tin/nhu cầu để shop hỗ trợ nhanh nhé.",
+    "oke": "Dạ ok ạ. Bạn gửi giúp shop thông tin/nhu cầu để shop hỗ trợ nhanh nhé.",
+    "vâng": "Dạ vâng ạ. Bạn cho shop xin thêm thông tin để hỗ trợ đúng nhu cầu nhé.",
+
+    "tạm biệt": "Tạm biệt bạn ạ. Khi nào cần cứ nhắn shop nhé!",
+    "bye": "Bye bạn. Khi nào cần cứ nhắn shop nhé!",
+
+    "bạn là ai": "Mình là bot hỗ trợ của shop. Mình giúp trả lời nhanh thông tin sản phẩm/đặt hàng/ship. Bạn cần hỗ trợ gì ạ?",
+    "shop là ai": "Shop đây ạ. Mình là bot hỗ trợ trả lời nhanh. Bạn đang cần tư vấn sản phẩm nào?",
+
+    "shop ở đâu": "Bạn cho shop xin khu vực/tỉnh thành nhé, shop sẽ gửi địa chỉ/điểm nhận hàng (nếu có) và hỗ trợ ship.",
+    "địa chỉ": "Bạn cho shop xin khu vực/tỉnh thành nhé, shop sẽ gửi địa chỉ/điểm nhận hàng (nếu có) và hỗ trợ ship.",
+
+    "thanh toán": "Shop hỗ trợ COD (nhận hàng thanh toán) và chuyển khoản. Bạn muốn thanh toán theo hình thức nào ạ?",
+    "chuyển khoản": "Dạ được ạ. Bạn nhắn shop để shop gửi thông tin chuyển khoản và xác nhận đơn nhé.",
+    "cod": "Dạ COD được ạ. Bạn cho shop xin tên + SĐT + địa chỉ + sản phẩm/size/màu để lên đơn nhé.",
+
+    "đổi trả": "Shop hỗ trợ đổi/trả theo chính sách (tùy sản phẩm). Bạn cho shop xin mã đơn + lý do + ảnh sản phẩm để shop kiểm tra nhé.",
+    "bảo hành": "Tùy sản phẩm sẽ có chính sách bảo hành. Bạn cho shop xin tên sản phẩm hoặc mã đơn để shop kiểm tra giúp nhé.",
+
+    "size": "Bạn cho shop xin chiều cao/cân nặng (và form mặc thích rộng/vừa/ôm) để shop tư vấn size chuẩn nhé.",
+    "kích cỡ": "Bạn cho shop xin chiều cao/cân nặng (và form mặc thích rộng/vừa/ôm) để shop tư vấn size chuẩn nhé.",
+    "màu": "Bạn thích màu nào ạ? Shop sẽ kiểm tra màu còn hàng và gửi ảnh thực tế nếu cần.",
+    "màu sắc": "Bạn thích màu nào ạ? Shop sẽ kiểm tra màu còn hàng và gửi ảnh thực tế nếu cần.",
+
+    "còn hàng không": "Bạn cho shop xin tên sản phẩm + size/màu (nếu có) để shop kiểm tra tồn kho ngay nhé.",
+    "còn không": "Bạn cho shop xin tên sản phẩm + size/màu (nếu có) để shop kiểm tra tồn kho ngay nhé.",
+
+    "giao hàng": "Thời gian giao tùy khu vực (thường 1-3 ngày nội thành, 3-5 ngày tỉnh). Bạn ở tỉnh/thành nào để shop báo chính xác nhé?",
+    "bao lâu tới": "Thời gian giao tùy khu vực (thường 1-3 ngày nội thành, 3-5 ngày tỉnh). Bạn ở tỉnh/thành nào để shop báo chính xác nhé?",
+    "theo dõi đơn": "Bạn gửi shop mã đơn hoặc SĐT đặt hàng, shop kiểm tra tình trạng vận chuyển giúp bạn ngay.",
+    "check đơn": "Bạn gửi shop mã đơn hoặc SĐT đặt hàng, shop kiểm tra tình trạng vận chuyển giúp bạn ngay.",
+    "hủy đơn": "Bạn gửi shop mã đơn hoặc SĐT đặt hàng, shop hỗ trợ kiểm tra và hủy nếu đơn chưa bàn giao cho đơn vị vận chuyển nhé.",
+
+    "tư vấn": "Dạ được ạ. Bạn cho shop biết bạn cần sản phẩm gì + ngân sách + size/màu/kiểu dáng để shop tư vấn nhanh nhé.",
+    "gửi hình": "Dạ được ạ. Bạn nhắn tên sản phẩm hoặc mô tả mẫu bạn thích, shop gửi ảnh/thông tin chi tiết nhé.",
+
+    "chúc ngủ ngon": "Ngủ ngon bạn nhé. Mai shop hỗ trợ tiếp ạ!",
+    "chúc buổi sáng": "Chúc bạn buổi sáng tốt lành. Hôm nay bạn cần shop hỗ trợ gì ạ?",
+
+    "bạn khỏe không": "Dạ shop vẫn ổn ạ. Còn bạn thì sao? Bạn cần shop hỗ trợ gì nè?",
+    "khỏe không": "Dạ shop vẫn ổn ạ. Còn bạn thì sao? Bạn cần shop hỗ trợ gì nè?",
+    "ăn chưa": "Dạ shop cảm ơn bạn hỏi thăm ạ. Bạn cần shop hỗ trợ thông tin sản phẩm/đặt hàng không?",
+    "ăn gì": "Dạ shop cảm ơn bạn ạ. Bạn muốn shop tư vấn sản phẩm nào để mình hỗ trợ nhanh nhé?",
+    "ngủ chưa": "Dạ shop vẫn đang online hỗ trợ ạ. Bạn cần shop giúp gì không?",
+    "đang làm gì": "Dạ shop đang online để hỗ trợ bạn ạ. Bạn cần tư vấn hay đặt hàng?",
+    "rảnh không": "Dạ shop đang online ạ. Bạn cần hỗ trợ gì cứ nhắn nhé.",
+
+    "giúp mình": "Dạ được ạ. Bạn nói rõ giúp shop bạn cần hỏi gì (giá/size/màu/ship/đặt hàng) nhé.",
+    "hỗ trợ": "Dạ shop sẵn sàng hỗ trợ ạ. Bạn cần hỏi về giá, size, ship hay đặt hàng?",
+    "cần hỗ trợ": "Dạ shop sẵn sàng hỗ trợ ạ. Bạn cần hỏi về giá, size, ship hay đặt hàng?",
+
+    "admin": "Dạ bạn cần gặp admin về vấn đề gì ạ? Bạn mô tả ngắn giúp shop để shop chuyển đúng người.",
+    "người thật": "Dạ được ạ. Bạn để lại nội dung cần hỗ trợ, shop sẽ nhờ tư vấn viên phản hồi sớm nhất.",
+    "tư vấn viên": "Dạ bạn mô tả nhu cầu (sản phẩm, ngân sách, size/màu) để tư vấn viên hỗ trợ nhanh nhé.",
+
+    "ship cod không": "Dạ shop có COD ạ. Bạn cho shop xin sản phẩm + địa chỉ để shop báo phí và lên đơn nhé.",
+    "free ship không": "Dạ tùy chương trình và khu vực ạ. Bạn cho shop xin tỉnh/thành và sản phẩm dự kiến mua để shop kiểm tra nhé.",
+
+    "đặt như thế nào": "Bạn gửi giúp shop: tên sản phẩm + size/màu + tên nhận hàng + SĐT + địa chỉ. Shop sẽ xác nhận và lên đơn ngay.",
+    "mua như thế nào": "Bạn gửi giúp shop: tên sản phẩm + size/màu + tên nhận hàng + SĐT + địa chỉ. Shop sẽ xác nhận và lên đơn ngay."
+
+}
