@@ -1,202 +1,182 @@
-// ===== CHECK LOGIN =====
 const username = localStorage.getItem("username");
+const token = getToken();
+if (!username || !token) window.location.href = "login.html";
 
-if (!username) {
-    window.location.href = "login.html";
-}
-
-// ===== DOM =====
 const chat = document.getElementById("chat");
 const input = document.getElementById("input");
 
-const session_id = Math.random().toString(36).substring(2);
+let sessionId = crypto.randomUUID();
+let mode = localStorage.getItem("mode") || "ai";
+let isSending = false;
 
-// ===== MODE =====
-let mode = localStorage.getItem("mode") || "ai"; // 🔥 load mode
+const EMPTY_STATE_HTML = `
+    <div id="empty-state" class="empty-state">
+        <div class="empty-visual">
+            <div class="orb orb-1"></div>
+            <div class="orb orb-2"></div>
+            <div class="empty-card">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+            </div>
+        </div>
+        <h2>Xin chào!</h2>
+        <p>Hỏi bất cứ điều gì — AI sẽ trả lời ngay, hoặc chuyển sang Knowledge để tra cứu dữ liệu.</p>
+        <div class="suggestions">
+            <button class="suggestion" onclick="useSuggestion('Xin chào, bạn có thể giúp gì?')">Xin chào 👋</button>
+            <button class="suggestion" onclick="useSuggestion('Giá sản phẩm bao nhiêu?')">Hỏi giá 💰</button>
+            <button class="suggestion" onclick="useSuggestion('Chính sách giao hàng thế nào?')">Giao hàng 📦</button>
+        </div>
+    </div>
+`;
 
-// ===== SET MODE =====
 function setMode(m) {
     mode = m;
-
-    // 🔥 lưu lại
     localStorage.setItem("mode", m);
 
-    const btnAI = document.getElementById("btn-ai");
-    const btnData = document.getElementById("btn-data");
+    document.getElementById("btn-ai")?.classList.toggle("active", m === "ai");
+    document.getElementById("btn-data")?.classList.toggle("active", m === "data");
 
-    if (!btnAI || !btnData) return;
-
-    btnAI.classList.remove("active");
-    btnData.classList.remove("active");
-
-    if (m === "ai") {
-        btnAI.classList.add("active");
-    } else {
-        btnData.classList.add("active");
-    }
-
-    console.log("MODE:", mode);
+    const badge = document.getElementById("mode-badge");
+    if (badge) badge.textContent = m === "ai" ? "AI" : "Data";
 }
 
-// ===== UI CHAT =====
+function useSuggestion(text) {
+    input.value = text;
+    autoResizeInput();
+    input.focus();
+    sendMessage();
+}
+
+function autoResizeInput() {
+    input.style.height = "auto";
+    input.style.height = Math.min(input.scrollHeight, 160) + "px";
+}
+
 function addMessage(text, type) {
     if (!text) return;
 
+    document.getElementById("empty-state")?.remove();
+
     const wrapper = document.createElement("div");
-    wrapper.className = "msg-wrapper " + type;
+    wrapper.className = `msg-wrapper ${type}`;
 
     const avatar = document.createElement("div");
     avatar.className = "avatar";
-    avatar.innerText = type === "user" ? "🧑" : "🤖";
+    avatar.textContent = type === "user" ? username.charAt(0).toUpperCase() : "AI";
 
     const bubble = document.createElement("div");
     bubble.className = "bubble";
-    bubble.innerText = text;
+    bubble.textContent = text;
 
-    if (type === "user") {
-        wrapper.appendChild(bubble);
-        wrapper.appendChild(avatar);
-    } else {
-        wrapper.appendChild(avatar);
-        wrapper.appendChild(bubble);
-    }
-
+    wrapper.append(avatar, bubble);
     chat.appendChild(wrapper);
     chat.scrollTop = chat.scrollHeight;
 }
 
-// ===== TYPING =====
 function showTyping() {
     const div = document.createElement("div");
     div.className = "msg-wrapper bot";
     div.id = "typing";
-
     div.innerHTML = `
-        <div class="avatar">🤖</div>
-        <div class="bubble">Đang trả lời...</div>
+        <div class="avatar">AI</div>
+        <div class="bubble typing-bubble">
+            <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+        </div>
     `;
-
     chat.appendChild(div);
+    chat.scrollTop = chat.scrollHeight;
 }
 
 function removeTyping() {
-    const t = document.getElementById("typing");
-    if (t) t.remove();
+    document.getElementById("typing")?.remove();
 }
 
-// ===== SEND =====
 async function sendMessage() {
     const text = input.value.trim();
-    if (!text) return;
+    if (!text || isSending) return;
+
+    isSending = true;
+    input.disabled = true;
+    document.querySelector(".send-btn")?.setAttribute("disabled", "");
 
     addMessage(text, "user");
     input.value = "";
-
+    autoResizeInput();
     showTyping();
 
     try {
-        console.log("ĐANG GỬI MODE:", mode); // 🔥 debug
-
-        const res = await fetch("http://127.0.0.1:5000/chat", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                text: text,
-                session_id: session_id,
-                mode: mode,
-                username: username
-            })
+        const data = await apiPost("/chat", {
+            text,
+            session_id: sessionId,
+            mode,
         });
-
-        const data = await res.json();
-
-        console.log("API RESPONSE:", data);
 
         removeTyping();
 
-        if (!data || !data.reply) {
-            addMessage("❌ Không có phản hồi từ server", "bot");
+        if (!data?.reply) {
+            addMessage("Không có phản hồi từ server", "bot");
             return;
         }
 
         addMessage(data.reply, "bot");
-
-    } catch (err) {
+    } catch {
         removeTyping();
-        addMessage("❌ Lỗi server", "bot");
-        console.error("SEND ERROR:", err);
+        addMessage("Lỗi kết nối server. Hãy kiểm tra backend đang chạy.", "bot");
+    } finally {
+        isSending = false;
+        input.disabled = false;
+        document.querySelector(".send-btn")?.removeAttribute("disabled");
+        input.focus();
     }
 }
 
-// ===== NEW CHAT =====
 function newChat() {
-    chat.innerHTML = "";
+    chat.innerHTML = EMPTY_STATE_HTML;
+    sessionId = crypto.randomUUID();
 }
 
-// ===== LOAD HISTORY =====
 async function loadHistory() {
     try {
-        const res = await fetch(
-            `http://127.0.0.1:5000/history?username=${username}`
-        );
+        const data = await apiGet("/history");
 
-        const text = await res.text();
-
-        let data;
-        try {
-            data = JSON.parse(text);
-        } catch {
-            console.error("❌ Response không phải JSON:", text);
-            return;
-        }
-
-        console.log("HISTORY:", data);
-
-        if (!Array.isArray(data)) {
-            console.error("❌ History không phải array:", data);
+        if (!Array.isArray(data) || data.length === 0) {
+            newChat();
             return;
         }
 
         chat.innerHTML = "";
-
-        data.forEach(item => {
+        data.forEach((item) => {
             if (item.user) addMessage(item.user, "user");
             if (item.bot) addMessage(item.bot, "bot");
         });
-
-    } catch (err) {
-        console.error("❌ Lỗi load history:", err);
+    } catch {
+        newChat();
     }
 }
 
-// ===== LOGOUT =====
 function logout() {
     localStorage.removeItem("username");
-    localStorage.removeItem("mode"); // 🔥 reset mode luôn
+    localStorage.removeItem("token");
+    localStorage.removeItem("mode");
     window.location.href = "login.html";
 }
 
-// ===== LOAD PAGE =====
-window.onload = () => {
-    loadHistory();
-
-    // 🔥 set lại UI đúng mode
-    setMode(mode);
-};
-
-// ===== ENTER SEND =====
-input.addEventListener("keypress", function(e) {
-    if (e.key === "Enter") {
+input.addEventListener("keydown", (e) => {
+    if (e.key === "Enter" && !e.shiftKey) {
+        e.preventDefault();
         sendMessage();
     }
 });
 
-// ===== HIỂN THỊ USERNAME =====
-window.addEventListener("DOMContentLoaded", () => {
+input.addEventListener("input", autoResizeInput);
+
+document.addEventListener("DOMContentLoaded", () => {
     const userDisplay = document.getElementById("username-display");
-    if (userDisplay && username) {
-        userDisplay.innerText = "👤 " + username;
-    }
+    if (userDisplay) userDisplay.textContent = username;
+
+    const avatarEl = document.getElementById("user-avatar");
+    if (avatarEl) avatarEl.textContent = username.charAt(0).toUpperCase();
+
+    setMode(mode);
+    loadHistory();
+    autoResizeInput();
 });

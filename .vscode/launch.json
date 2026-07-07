@@ -1,0 +1,14 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Nova: Backend API",
+      "type": "debugpy",
+      "request": "launch",
+      "program": "${workspaceFolder}/backend/api.py",
+      "console": "integratedTerminal",
+      "cwd": "${workspaceFolder}/backend",
+      "envFile": "${workspaceFolder}/.env"
+    }
+  ]
+}

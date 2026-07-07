@@ -1,4 +1,10 @@
-[{
+[
+  {
     "username": "nguyenxuanhung22tq@gmail.com",
-    "password": "25801379hung"
-}]
+    "password": "$2b$12$dxcRg3JDnhWYyKH3AqYTtuuBxvZ4KM69I2wzg9kWq4WcqN/.dVxV."
+  },
+  {
+    "username": "xuanhung08",
+    "password": "$2b$12$a4eDVg/nhi7teY0YKBSBdOZWhEG9hcmZEkuH09WI/iarOVmBPTvgK"
+  }
+]

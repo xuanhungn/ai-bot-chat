@@ -1,38 +1,38 @@
 async function login() {
     const username = document.getElementById("username").value.trim();
-    const password = document.getElementById("password").value.trim();
+    const password = document.getElementById("password").value;
+    const btn = document.querySelector(".btn-primary");
+    const errorEl = document.getElementById("error-msg");
+
+    errorEl.textContent = "";
 
     if (!username || !password) {
-        alert("Vui lòng nhập đầy đủ");
+        errorEl.textContent = "Vui lòng nhập đầy đủ thông tin";
         return;
     }
 
+    btn.disabled = true;
+    btn.textContent = "Đang đăng nhập...";
+
     try {
-        const res = await fetch("http://127.0.0.1:5000/login", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                username: username,
-                password: password
-            })
-        });
+        const data = await apiPost("/login", { username, password });
 
-        const data = await res.json();
-
-        if (data.msg.includes("thành công")) {
-            // 🔥 lưu user
-            localStorage.setItem("username", username);
-
-            // chuyển sang chat
+        if (data.msg?.includes("thành công") && data.token) {
+            localStorage.setItem("username", data.username || username);
+            localStorage.setItem("token", data.token);
             window.location.href = "index.html";
         } else {
-            alert(data.msg);
+            errorEl.textContent = data.msg || "Đăng nhập thất bại";
         }
-
     } catch (err) {
-        alert("❌ Lỗi server");
-        console.error(err);
+        errorEl.textContent = err.message || "Không thể kết nối server";
+        console.error("Login error:", err);
+    } finally {
+        btn.disabled = false;
+        btn.textContent = "Đăng nhập";
     }
 }
+
+document.getElementById("password")?.addEventListener("keydown", (e) => {
+    if (e.key === "Enter") login();
+});

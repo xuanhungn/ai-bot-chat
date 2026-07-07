@@ -1,0 +1,25 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Nova: Chạy Backend",
+      "type": "shell",
+      "command": "python api.py",
+      "options": {
+        "cwd": "${workspaceFolder}/backend",
+        "env": {
+          "PYTHONUTF8": "1"
+        }
+      },
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated"
+      },
+      "problemMatcher": []
+    }
+  ]
+}
