@@ -66,3 +66,17 @@ cp .env.example .env
 # điền GROQ_API_KEY vào .env
 cd backend && python api.py
 ```
+
+## Deploy backend lên Render (để dùng với Vercel)
+
+1. Push code mới nhất lên GitHub.
+2. Vào [render.com](https://render.com) -> **New** -> **Blueprint** -> chọn repo này.
+3. Render sẽ đọc file `render.yaml` và tạo web service backend.
+4. Sau khi deploy xong, copy URL backend dạng:
+   - `https://ten-service.onrender.com`
+5. Mở `frontend/js/config.js`, thay dòng:
+   - `https://RENDER_BACKEND_URL.onrender.com`
+   bằng URL thật của Render backend.
+6. Push lại lên GitHub để Vercel tự deploy frontend mới.
+
+Lưu ý: frontend Vercel và backend Render phải dùng URL public, backend local trong VS Code không phục vụ được cho link Vercel.

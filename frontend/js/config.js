@@ -1,4 +1,14 @@
-const API_BASE = "https://logical-bracelet-qualified-mat.trycloudflare.com";
+const API_BASE = (() => {
+    const { hostname, origin } = window.location;
+
+    // Local dev: backend chạy trong VS Code.
+    if (hostname === "127.0.0.1" || hostname === "localhost") {
+        return "http://127.0.0.1:5000";
+    }
+
+    // Production: đổi URL này thành backend Render của bạn.
+    return "https://RENDER_BACKEND_URL.onrender.com";
+})();
 
 function getToken() {
     return localStorage.getItem("token");
