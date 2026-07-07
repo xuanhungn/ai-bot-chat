@@ -226,21 +226,52 @@ def history():
         return jsonify([])
 
 
+# ==========================
+# FRONTEND
+# ==========================
+
+# Trang mặc định là Login
 @app.route("/", methods=["GET"])
+def serve_root():
+    return send_from_directory(FRONTEND_DIR, "login.html")
+
+
+# Trang Login
+@app.route("/login.html", methods=["GET"])
+def serve_login():
+    return send_from_directory(FRONTEND_DIR, "login.html")
+
+
+# Trang Đăng ký
+@app.route("/register.html", methods=["GET"])
+def serve_register():
+    return send_from_directory(FRONTEND_DIR, "register.html")
+
+
+# Trang Chat
+@app.route("/index.html", methods=["GET"])
 def serve_index():
     return send_from_directory(FRONTEND_DIR, "index.html")
 
 
+# Các file CSS, JS, IMG...
 @app.route("/<path:path>", methods=["GET"])
 def serve_frontend(path):
     file_path = os.path.join(FRONTEND_DIR, path)
+
     if os.path.isfile(file_path):
         return send_from_directory(FRONTEND_DIR, path)
+
     abort(404)
 
 
 if __name__ == "__main__":
     port = int(os.getenv("PORT", 5000))
-    print(f"Server running at http://127.0.0.1:{port}")
-    print(f"Mo trinh duyet: http://127.0.0.1:{port}/login.html")
+
+    print("=" * 50)
+    print(f"Server running at: http://127.0.0.1:{port}")
+    print(f"Login page      : http://127.0.0.1:{port}/")
+    print(f"Chat page       : http://127.0.0.1:{port}/index.html")
+    print("=" * 50)
+
     app.run(host="0.0.0.0", port=port, debug=False)
