@@ -1,25 +1,4 @@
-const API_BASE = (() => {
-    const { protocol, hostname, port, origin } = window.location;
-
-    if (protocol === "file:" || !hostname) {
-        return "http://127.0.0.1:5000";
-    }
-
-    // Production: frontend + API cùng domain (Render, VPS, ...)
-    if (!port || port === "443" || port === "80") {
-        return origin;
-    }
-
-    if (port === "5000") {
-        return origin;
-    }
-
-    if (hostname === "127.0.0.1" || hostname === "localhost") {
-        return "http://127.0.0.1:5000";
-    }
-
-    return origin;
-})();
+const API_BASE = "https://logical-bracelet-qualified-mat.trycloudflare.com";
 
 function getToken() {
     return localStorage.getItem("token");
