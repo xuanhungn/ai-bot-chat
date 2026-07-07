@@ -6,8 +6,8 @@ const API_BASE = (() => {
         return "http://127.0.0.1:5000";
     }
 
-    // Production: đổi URL này thành backend Render của bạn.
-    return "https://RENDER_BACKEND_URL.onrender.com";
+    // Production backend on Render.
+    return "https://ai-bot-chat-api.onrender.com";
 })();
 
 function getToken() {
